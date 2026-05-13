@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@theme {
+  --color-main: #111111;
+  --color-border: #2f2f2f;
+  --color-accent: #f3c15e;
+}
+
+:root {
+  --bg: #111111;
+  --border: #2f2f2f;
+  --textprimary: #faf7f0;
+  --textsecondary: #f2eee6;
+  --accent: #f3c15e;
+  
+  background: var(--bg);
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  color: var(--textprimary);
+}
+
+
+/* UI */
+.buttonStyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33px;
+  height: 33px;
+  border-radius: 8px;
+  transition: ease-in-out 0.2s;
+}
+
+.buttonStyle:hover, .is-active {
+  background: #ffffff1f;
+}
+
+.is-active {
+  color: var(--accent);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateX(-5px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-in {
+  animation: slideDown 0.25s ease-in;
+}
+
+/* Editor Tiptap */
+.ProseMirror {
+  outline: none;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+    margin-top: 1.5rem;
+    text-wrap: pretty;
+  }
+  h1, h2 { margin-bottom: 1.5rem; }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.2rem; }
+  h3 { font-size: 1.1rem; }
+
+  /* Links / Marks */
+  a { color: var(--accent); text-decoration: underline; }
+  mark {
+    background-color: var(--accent);
+    border-radius: 0.4rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  /* Lists */
+  ul, ol {
+    padding: 0 1rem;
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+    li p { margin: 0.25em 0; }
+  }
+  ::marker { color: var(--border); }
+
+  
+
+  ul[data-type="taskList"] {
+    
+    padding: 0;
+    label {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+    li {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      input[type="checkbox"] {
+        appearance: none;
+        width: 1.2rem;
+        height: 1.2rem;
+        border: 2px solid var(--border);
+        border-radius: 4px;
+        position: relative;
+        cursor: pointer;
+        &:checked {
+          background-color: var(--accent);
+          border-color: var(--accent);
+          &::after {
+            content: '';
+            position: absolute;
+            top: 2px; left: 5px;
+            width: 5px; height: 10px;
+            border: solid #111;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+  }
+
+  /* Codeblock */
+  code {
+    background-color: #767676;
+    border-radius: 0.4rem;
+    color: #272727;
+    font-size: 0.85rem;
+    padding: 0.25em 0.3em;
+  }
+
+  pre {
+    background: var(--border);
+    border-radius: 0.5rem;
+    color: #fff;
+    font-family: 'JetBrainsMono', monospace;
+    margin: 1.5rem 0;
+    padding: 0.75rem 1rem;
+    code { background: none; color: inherit; padding: 0; }
+  }
+
+  blockquote {
+    border-left: 3px solid var(--border);
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  /* Placeholder */
+  p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #d5d1c6;
+    pointer-events: none;
+    height: 0;
+    opacity: 0.4;
+  }
+}
+
+/* Scroll */
+*::-webkit-scrollbar { width: 8px; }
+*::-webkit-scrollbar-track { background: var(--bg); }
+*::-webkit-scrollbar-thumb { 
+  background: #f8e4732d; 
+  border-radius: 3px; 
+}
+
+
+
+
+.ProseMirror ul { list-style-type: disc; }
+.ProseMirror ol { list-style-type: decimal; }
+
